@@ -1,6 +1,6 @@
-$(document).ready(function(){
+function generate_pagination() {
   //how much items per page to show
-  var show_per_page = 10; 
+  var show_per_page = 2; 
   //getting the amount of elements inside content div
   var number_of_items = $('#content').children().size();
   //calculate the number of pages we are going to have
@@ -26,10 +26,10 @@ $(document).ready(function(){
   }
   navigation_html += '<li class="next_link"><a href="javascript:next_page();">Next</a></li>';
   
-  $('#page_navigation').html('<ul>' + navigation_html + '</ul>');
+  $('.page_navigation').html('<ul>' + navigation_html + '</ul>');
   
   //add active class to the first page link
-  $('#page_navigation .page_link:first').addClass('active');
+  $('.page_navigation .page_link:first').addClass('active');
   
   //hide all the elements inside content div
   $('#content').children().css('display', 'none');
@@ -37,7 +37,7 @@ $(document).ready(function(){
   //and show the first n (show_per_page) elements
   $('#content').children().slice(0, show_per_page).css('display', 'block');
     
-});
+}
  
 function previous_page(){
   new_page = parseInt($('#current_page').val()) - 1;
