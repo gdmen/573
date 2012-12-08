@@ -1,6 +1,7 @@
 window.fbAsyncInit = function() {
   // init the FB JS SDK
   FB.init({
+    //appId      : '128890687175319',
     appId      : '495212357178271', // App ID from the App Dashboard
     channelUrl : 'channel.html', // Channel File for x-domain communication
     status     : true, // check the login status upon init?
@@ -12,7 +13,7 @@ window.fbAsyncInit = function() {
   FB.getLoginStatus(function(response) {
     if (response.status === 'connected') {
       // User logged into FB and authorized
-      testAPI();
+      testAPI(response.authResponse.accessToken);
       $('.fb-login-button').css("display","none");
     } else if (response.status === 'not_authorized') {
       // User logged into FB but not authorized
@@ -30,8 +31,26 @@ function logout() {
     console.log('User is now logged out');
   });
 }
-function testAPI() {
-  FB.api('/me/likes', function(response) {
+function testAPI(access_token) {
+  FB.api('/me/likes?access_token='+access_token, function(response) {
+    console.log(response);
+  });
+  FB.api('/me/movies?access_token='+access_token, function(response) {
+    console.log(response);
+  });
+  FB.api('/me/music?access_token='+access_token, function(response) {
+    console.log(response);
+  });
+  FB.api('/me/books?access_token='+access_token, function(response) {
+    console.log(response);
+  });
+  FB.api('/me/groups?access_token='+access_token, function(response) {
+    console.log(response);
+  });
+  FB.api('/me/events?access_token='+access_token, function(response) {
+    console.log(response);
+  });
+  FB.api('/me/locations?access_token='+access_token, function(response) {
     console.log(response);
   });
 }
