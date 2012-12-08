@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html> 
+<head>
+    <title>NYTimes API</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+			$(document).ready(function() {
+				localStorage.setItem('lsLocation', 'New York');
+				localStorage.setItem('lsQuery', 'new york,times,square');
+			});
+
+			$(document).ready(function() {
+				getNews(10,0);
+			});
+
+			function getNews(limit, offset) {
+				
+
+				var query = 'philadelphia';
+
+				//$("#ansDiv").append("<p>function called: " + limit + ", " + offset + " - " + query + "</p>");
+				var results = [];
+				var index = 0;
+					$.ajax({
+						url : 'http://api.nytimes.com/svc/search/v1/article?format=json&query='+query+'&rank=closest&api-key=4f48f2d45d0561321169a2b5fa181b3a:13:67021735',
+						async : false,
+						dataType: "jsonp",
+						success : function(data) {
+							// do stuff with response.
+							$('#result').html('');
+							var all = data.results;
+							var ul = $('ul#list'); 
+							//$.each(data.results, function() { 								
+								// var head = this.title + ' <a class="readmore" href="'+ this.url +'" target="_blank">Read more</a>' + ' <p>'+this.body+'</p>';
+                                // var li = $('<li/>').html(head); 
+                                // ul.append(li) 
+                           // }); 
+							
+							for ( j = 0; ((index < limit) && (j < all.length)); j++) {
+								results[index] = all[j];
+								index = index + 1;
+							
+								console.log(results);
+							}
+
+						}
+					});
+				
+			}
+</script>
+
+</head>
+<body>
+    <div class="main">
+        <h2>Current news of your interest</h2>
+        <hr />
+        <div class="images">
+            <div style="text-align:center" id="result"></div>
+            <div>
+                <ul id="list"></ul>
+            </div>
+        </div>
+        <hr />
+         <!-- <div class="button"><a class="button white bigrounded" id="load_more">Load More</a></div> -->
+    </div>
+</body>
+</html>

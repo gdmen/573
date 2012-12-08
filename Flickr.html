@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html> 
+<head>
+    <title>Flickr API</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	     $(document).ready(function() {
+				localStorage.setItem('lsLocation', 'New York');
+				localStorage.setItem('lsQuery', 'new york,times,square');
+			});
+
+			$(document).ready(function() {
+				getPhotos(10, 0);
+			});
+
+			function getPhotos(limit, offset) {
+				var query = 'Times Square'
+
+				//query = query.replace(/ /g,"+");
+
+				//$("#ansDiv").append("<p>function called: " + limit + ", " + offset + " - " + query + "</p>");
+				var results = [];
+				var per_page = limit*2;
+				var page = Math.floor(offset/per_page)+1;
+				var index = 0;
+                    $.ajax({
+						url : 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=6b5056ae9f40f0dede2bddb0c5a0eba6&tags=' + query +'&safe_search=1&per_page=' + per_page +'&page='+page+'&format=json&jsoncallback=?',
+						async : false,
+						dataType: "json",
+						success : function(data) {
+							// do stuff with response.
+							$('#result').html('');
+							var all = data.photos.photo;
+							var ul = $('ul#list'); 
+							$.each(data.photos.photo, function() { 
+								 var iPath = "http://farm"+  this.farm +".static.flickr.com/" + this.server +"/"+this.id+"_"+this.secret+"_z.jpg";
+								 var head = '<img src='+iPath+' alt="flickr image" width="250" height="250"/>'
+                                 var li = $('<li/>').html(head); 
+                                 ul.append(li) 
+                            }); 
+					
+							for ( j = 0; ((index < limit) && (j < all.length)); j++) {
+								results[index] = all[j];
+								index = index + 1;
+							
+								console.log(results);
+							}
+							
+							
+						}
+					});
+        }
+	</script>
+</head>
+<body>
+    <div class="main">
+        <h2>Photos of your interest</h2>
+        <hr />
+        <div class="images">
+            <div style="text-align:center" id="result"></div>
+            <div>
+                <ul id="list"></ul>
+            </div>
+        </div>
+        <hr />
+         <!-- <div class="button"><a class="button white bigrounded" id="load_more">Load More</a></div> -->
+    </div>
+</body>
+</html>
