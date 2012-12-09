@@ -1,5 +1,5 @@
 <?php include_once('includes/header.php'); ?>
-<? generate_header("Photos"); ?>
+<? generate_header("News"); ?>
     <div class="container"><!-- the input fields that will hold the variables we will use -->
       <input type='hidden' id='current_page' />
       <input type='hidden' id='show_per_page' />
@@ -17,7 +17,7 @@
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/category.js"></script>
-    <script src="assets/js/photos.js"></script>
+    <script src="assets/js/news.js"></script>
 
   </body>
 </html>

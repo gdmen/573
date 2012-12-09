@@ -1,7 +1,16 @@
-function generate_pagination() {
-  //how much items per page to show
-  var show_per_page = 2; 
-  //getting the amount of elements inside content div
+/* source: http://stackoverflow.com/questions/10664123/jquery-bootstrap-pagination */
+
+/* Given:
+       <div id='content'>{child elements}</div>
+       <div class="page_navigation"></div> 
+   and <input type='hidden' id='current_page' />
+       <input type='hidden' id='show_per_page' />
+   and 'show_per_page',
+   Generates:
+    A paginated view of the <N> child elements of '#content' with 'show_per_page'
+    elements per page.
+*/
+function generate_pagination(show_per_page) {
   var number_of_items = $('#content').children().size();
   //calculate the number of pages we are going to have
   var number_of_pages = Math.ceil(number_of_items/show_per_page);
@@ -9,8 +18,6 @@ function generate_pagination() {
   //set the value of our hidden input fields
   $('#current_page').val(0);
   $('#show_per_page').val(show_per_page);
-  
-  //now when we got all we need for the navigation let's make it '
   
   /* 
   what are we going to have in the navigation?
@@ -39,7 +46,7 @@ function generate_pagination() {
     
 }
  
-function previous_page(){
+function previous_page() {
   new_page = parseInt($('#current_page').val()) - 1;
   //if there is an item before the current active link run the function
   if($('.active').prev('.page_link').length==true){
@@ -47,14 +54,15 @@ function previous_page(){
   }
 }
 
-function next_page(){
+function next_page() {
   new_page = parseInt($('#current_page').val()) + 1;
   //if there is an item after the current active link run the function
   if($('.active').next('.page_link').length==true){
     go_to_page(new_page);
   }
 }
-function go_to_page(page_num){
+
+function go_to_page(page_num) {
   //get the number of items shown per page
   var show_per_page = parseInt($('#show_per_page').val());
   
@@ -73,4 +81,9 @@ function go_to_page(page_num){
   
   //update the current page input field
   $('#current_page').val(page_num);
+}
+
+/* source: http://stackoverflow.com/questions/1403888/get-url-parameter-with-jquery */
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }

@@ -5,37 +5,8 @@
     <div class="container">
       <div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1">Login w/ Facebook</div>
       <a href="" id="fb-logout" onclick="logout()">Log out</a>
-      <ul class="thumbnails">
-        <li class="span4">
-          <a href="photos.php" class="thumbnail">
-            <img src="http://placehold.it/200x200" alt="">
-          </a>
-        </li>
-        <li class="span4">
-          <a href="news.php" class="thumbnail">
-            <img src="http://placehold.it/200x200" alt="">
-          </a>
-        </li>
-        <li class="span4">
-          <a href="sports.php" class="thumbnail">
-            <img src="http://placehold.it/200x200" alt="">
-          </a>
-        </li>
-        <li class="span4">
-          <a href="shopping.php" class="thumbnail">
-            <img src="http://placehold.it/200x200" alt="">
-          </a>
-        </li>
-        <li class="span4">
-          <a href="restaurants.php" class="thumbnail">
-            <img src="http://placehold.it/200x200" alt="">
-          </a>
-        </li>
-        <li class="span4">
-          <a href="events.php" class="thumbnail">
-            <img src="http://placehold.it/200x200" alt="">
-          </a>
-        </li>
+      <ul id="menu" class="thumbnails">
+        
       </ul>
 
     </div> <!-- /container -->
