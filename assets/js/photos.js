@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  displayItems(20,2);
+  displayItems(20,1);
 });
 
 /* Takes a number of items to get and a number per paginated page
@@ -38,9 +38,9 @@ function displayItems(limit, num_per_page) {
 */
 function renderItems(items){
   for(var i=0; i<items.length; i++){
+    console.log(items[i]);
     var iPath = "http://farm"+  items[i].farm +".static.flickr.com/" + items[i].server +"/"+items[i].id+"_"+items[i].secret+"_z.jpg";
-    //console.log(iPath);
-    $('#content').append('<div><img src='+iPath+'></div>');
+    $('#content').append('<img class="center" src='+iPath+'>');
   }
 }
 

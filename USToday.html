@@ -1,46 +1,38 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html> 
 <head>
-    <title>Zappos API</title>
+    <title>US Today API</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	     $(document).ready(function() {
+
+			$(document).ready(function() {
 				localStorage.setItem('lsLocation', 'New York');
 				localStorage.setItem('lsQuery', 'new york,times,square');
 			});
 
 			$(document).ready(function() {
-				getPhotos(10, 0);
+				getNews(10,0);
 			});
 
-			function getPhotos(limit, offset) {
-				var query = 'shirt+boot'
+			function getNews(limit, offset) {
+				
 
-				//query = query.replace(/ /g,"+");
+				var query = 'global-warming,obama';
 
 				//$("#ansDiv").append("<p>function called: " + limit + ", " + offset + " - " + query + "</p>");
 				var results = [];
-				var per_page = limit*2;
-				var page = Math.floor(offset/per_page)+1;
 				var index = 0;
-                    $.ajax({
-						url : 'http://api.zappos.com/Search?term='+query+'&key=c0d7e0d1f46cc2a4c70f6b8e45a1195512f79456',
+				   $.ajax({
+						url : 'http://api.usatoday.com/open/articles?tag='+query+'&count=20&encoding=json&api_key=jp7pjmyhba9r7g6vcwdcvs97',
 						async : false,
-						dataType: "jsonp",
+						dataType: "json",
 						success : function(data) {
 							// do stuff with response.
 							$('#result').html('');
-							var all = data.results;
+							var all = data.stories;
 							var ul = $('ul#list'); 
-							$.each(data.results, function() { 
-								 var iPath = this.thumbnailImageUrl
-								 var head = '<img src='+iPath+' alt="flickr image" width="150" height="150"/><p>'+this.productName+'</p>'
-                                 var li = $('<li/>').html(head); 
-                                 ul.append(li) 
-                            }); 
 					
 							for ( j = 0; ((index < limit) && (j < all.length)); j++) {
 								results[index] = all[j];
@@ -52,12 +44,13 @@
 							
 						}
 					});
-        }
-	</script>
+			}
+</script>
+
 </head>
 <body>
     <div class="main">
-        <h2>Shopping items of your interest</h2>
+        <h2>Current news of your interest</h2>
         <hr />
         <div class="images">
             <div style="text-align:center" id="result"></div>
