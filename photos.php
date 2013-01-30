@@ -7,6 +7,11 @@
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/category.js"></script>
     <script src="assets/js/photos.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      displayPhotos(20,1);
+    });
+    </script>
 
   </body>
 </html>

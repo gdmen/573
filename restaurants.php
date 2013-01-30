@@ -8,8 +8,13 @@
     <script src="assets/js/category.js"></script>
     <script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="assets/js/restaurants.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      displayRestaurants(20, 1);
+    });
+    </script>
 
   </body>
 </html>

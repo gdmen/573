@@ -1,11 +1,10 @@
-$(document).ready(function() {
-  displayItems(20,1);
-});
-
 /* Takes a number of items to get and a number per paginated page
    Results in the items inserted into the current page
 */
-function displayItems(limit, num_per_page) {
+function displayPhotos(limit, num_per_page) {
+  if(limit <= 0 || num_per_page <= 0){
+    return;
+  }
   query = getURLParameter('tags');
   query = query.replace(/ /g,",");
   
@@ -25,7 +24,7 @@ function displayItems(limit, num_per_page) {
           index = index + 1;
         }
       }
-      renderItems(items.slice(0,limit));
+      renderPhotos(items.slice(0,limit));
       generate_pagination(num_per_page);
     }
   });
@@ -35,11 +34,19 @@ function displayItems(limit, num_per_page) {
     Array = {<item object>}
    and inserts the given items into the current page's #content div.
 */
-function renderItems(items){
-  for(var i=0; i<items.length; i++){
-    console.log(items[i]);
-    var iPath = "http://farm"+  items[i].farm +".static.flickr.com/" + items[i].server +"/"+items[i].id+"_"+items[i].secret+"_z.jpg";
-    $('#content').append('<img class="center" src='+iPath+'>');
-  }
+function renderPhotos(items){
+  $('#content').empty();
+  $('#content').append(formatPhotos(items));
 }
-
+/* Takes an array of json objects:
+    Array = {<item object>}
+   and returns an html formatted string.
+*/
+function formatPhotos(items){
+  retString = '';
+  for(var i=0; i<items.length; i++){
+    var iPath = "http://farm"+  items[i].farm +".static.flickr.com/" + items[i].server +"/"+items[i].id+"_"+items[i].secret+"_z.jpg";
+    retString += '<img class="center" src='+iPath+'>';
+  }
+  return retString;
+}

@@ -6,8 +6,12 @@
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/category.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="assets/js/sports.js"></script>
-
+    <script type="text/javascript">
+    $(document).ready(function() {
+      displaySports(20,1);
+    });
+    </script>
   </body>
 </html>

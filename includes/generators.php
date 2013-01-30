@@ -44,7 +44,7 @@ function generate_header(){
           <a class="brand" href="index.php">menu</a>
 	      </div>
         <ul class="nav nav-tabs">
-          <li><div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1" style="display:none">Login w/ Facebook</div></li>
+          <li><div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1" style="display:none">Login with Facebook</div></li>
           <li><a href="" id="fb-logout" onclick="logout()" style="display:none">Log out</a></li>
         </ul>
         </div><!--/.nav-collapse -->
@@ -52,9 +52,6 @@ function generate_header(){
     </div>
   </div>
 <?php } ?>
-
-
-
 
 <?php
 function generate_container($page_title){
@@ -76,7 +73,7 @@ function generate_container($page_title){
       <div class="row">
         <div class="span8 offset2">
           <!-- Content div. The child elements will be used for paginating. '-->
-          <div id='content'></div>
+          <div id='content'><div id="loading"><img src="assets/img/ajax-loader.gif"/></div></div>
         </div>
       </div>
       
