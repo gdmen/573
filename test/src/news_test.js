@@ -1,8 +1,10 @@
 module("News",{
   setup: function(){
     $('#content').empty();
+    $('.page_navigation').empty();
   },teardown: function(){
     $('#content').empty();
+    $('.page_navigation').empty();
   }
 });
 
@@ -85,32 +87,63 @@ asyncTest("displayNews zero items", function() {
 
 /* displayNews */
 asyncTest("displayNews one item", function() {
-  expect(4);
+  expect(13);
   displayNews(1,1);
   
   setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
+    // number of assertions = 4*limit
     $('#content').children().each(function(){
       ok($(this).is('div'), 'div is present');
       ok($(this).children().first().is('h3'), 'div > h3 is present');
       ok($(this).children().first().children().first().is('a'), 'div > h3 > a is present');
       ok($(this).children().last().is('p'), 'div > p is present');
     });
+    verifyPagination(1,1);
     start();
   }, 4000);
 });
 
 /* displayNews */
 asyncTest("displayNews multiple items", function() {
-  expect(20);
+  expect(37);
   displayNews(5,1);
   
   setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
+    // number of assertions = 4*limit
     $('#content').children().each(function(){
       ok($(this).is('div'), 'div is present');
       ok($(this).children().first().is('h3'), 'div > h3 is present');
       ok($(this).children().first().children().first().is('a'), 'div > h3 > a is present');
       ok($(this).children().last().is('p'), 'div > p is present');
     });
+    verifyPagination(5,1);
+    start();
+  }, 4000);
+});
+
+/* displayNews */
+asyncTest("displayNews multiple pages", function() {
+  expect(33);
+  displayNews(5,2);
+  
+  setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
+    // number of assertions = 4*limit
+    $('#content').children().each(function(){
+      ok($(this).is('div'), 'div is present');
+      ok($(this).children().first().is('h3'), 'div > h3 is present');
+      ok($(this).children().first().children().first().is('a'), 'div > h3 > a is present');
+      ok($(this).children().last().is('p'), 'div > p is present');
+    });
+    verifyPagination(5,2);
     start();
   }, 4000);
 });

@@ -96,7 +96,7 @@ function patchAPICall(limit, num_per_page, state, city){
         renderNews(items.slice(0,limit));
         generate_pagination(num_per_page);
       }catch(e){
-        setTimeout('patchAPICall('+limit+', '+num_per_page+', "'+state+'", "'+city+'")', 250);
+        setTimeout('patchAPICall('+limit+', '+num_per_page+', "'+state+'", "'+city+'")', 500);
       }
     }
   });

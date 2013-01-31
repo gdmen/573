@@ -96,7 +96,6 @@ function codeLatLngRestaurants(limit, num_per_page, position) {
           items[index] = all[j];
           index = index + 1;
         }
-        console.log(JSON.stringify(items));
         renderRestaurants(items);
         generate_pagination(num_per_page);
       }

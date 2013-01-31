@@ -1,8 +1,10 @@
 module("Photos",{
   setup: function(){
     $('#content').empty();
+    $('.page_navigation').empty();
   },teardown: function(){
     $('#content').empty();
+    $('.page_navigation').empty();
   }
 });
 
@@ -59,27 +61,51 @@ asyncTest("displayPhotos zero items", function() {
 
 /* displayPhotos */
 asyncTest("displayPhotos one item", function() {
-  expect(1);
+  expect(10);
   displayPhotos(1,1);
   
   setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
     $('#content').children().each(function(){
       ok($(this).is('img'), 'img is present');
     });
+    verifyPagination(1,1);
     start();
   }, 2000);
 });
 
 /* displayPhotos */
 asyncTest("displayPhotos multiple items", function() {
-  expect(5);
+  expect(22);
   displayPhotos(5,1);
   
   setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
     $('#content').children().each(function(){
       ok($(this).is('img'), 'img is present');
     });
+    verifyPagination(5,1);
     start();
   }, 2000);
 });
 
+/* displayPhotos */
+asyncTest("displayPhotos multiple pages", function() {
+  expect(18);
+  displayPhotos(5,2);
+  
+  setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
+    $('#content').children().each(function(){
+      ok($(this).is('img'), 'img is present');
+    });
+    verifyPagination(5,2);
+    start();
+  }, 2000);
+});

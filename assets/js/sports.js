@@ -1,5 +1,6 @@
 /* Takes a number of items to get and a number per paginated page
    Results in the items inserted into the current page
+   **Max limit for this API is 10
 */
 function displaySports(limit, num_per_page) {
   if(limit <= 0 || num_per_page <= 0){
@@ -12,7 +13,6 @@ function displaySports(limit, num_per_page) {
     success : function(data) {
       var items = [];
       // do stuff with response.
-      console.log(data);
       var all = data.headlines;
       for (var j = 0; ((index < limit) && (j < all.length)); j++) {
         items[index] = all[j];

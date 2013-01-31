@@ -30,6 +30,7 @@
   <script src="../assets/js/restaurants.js"></script>
   <script src="src/restaurants_test.js"></script>
   
-  <div id="content" style="display:none; /*for testing*/"></div>
+  <div class="page_navigation" style="display:none; /*for testing*/"></div>
+  <div id="content" style="/*for testing*/"></div>
 </body>
 </html>

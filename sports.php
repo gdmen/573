@@ -10,7 +10,7 @@
     <script src="assets/js/sports.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-      displaySports(20,1);
+      displaySports(10,1);
     });
     </script>
   </body>

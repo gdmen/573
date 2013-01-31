@@ -1,8 +1,10 @@
 module("Restaurants",{
   setup: function(){
     $('#content').empty();
+    $('.page_navigation').empty();
   },teardown: function(){
     $('#content').empty();
+    $('.page_navigation').empty();
   }
 });
 
@@ -137,10 +139,13 @@ asyncTest("displayRestaurants zero items", function() {
 
 /* displayRestaurants */
 asyncTest("displayRestaurants one item", function() {
-  expect(15);
+  expect(24);
   displayRestaurants(1,1);
   
   setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
     $('#content').children().each(function(){
       ok($(this).is('div'), 'div is present');
       
@@ -161,16 +166,20 @@ asyncTest("displayRestaurants one item", function() {
       ok($(this).children().last().children().last().is('div'), 'div > div > div is present');
       ok($(this).children().last().children().last().children().first().is('img'), 'div > div > div > img is present');
     });
+    verifyPagination(1,1);
     start();
   }, 2000);
 });
 
 /* displayRestaurants */
 asyncTest("displayRestaurants multiple items", function() {
-  expect(75);
+  expect(92);
   displayRestaurants(5,1);
   
   setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
     $('#content').children().each(function(){
       ok($(this).is('div'), 'div is present');
       
@@ -191,6 +200,41 @@ asyncTest("displayRestaurants multiple items", function() {
       ok($(this).children().last().children().last().is('div'), 'div > div > div is present');
       ok($(this).children().last().children().last().children().first().is('img'), 'div > div > div > img is present');
     });
+    verifyPagination(5,1);
+    start();
+  }, 2000);
+});
+
+/* displayRestaurants */
+asyncTest("displayRestaurants multiple pages", function() {
+  expect(88);
+  displayRestaurants(5,2);
+  
+  setTimeout(function() {
+    if($('#content').is(":empty")){
+      ok(false, 'API call timed out. RETRY TEST.');
+    }
+    $('#content').children().each(function(){
+      ok($(this).is('div'), 'div is present');
+      
+      ok($(this).children().first().is('div'), 'div > div is present');
+      ok($(this).children().first().children().first().is('div'), 'div > div > div is present');
+      ok($(this).children().first().children().first().children().first().is('h3'), 'div > div > div > h3 is present');
+      ok($(this).children().first().children().last().is('div'), 'div > div > div is present');
+      ok($(this).children().first().children().last().children().first().is('h3'), 'div > div > div > h3 is present');
+
+      ok($(this).children(':nth-child(2)').is('div'), 'div > div is present');
+      ok($(this).children(':nth-child(2)').children().first().is('div'), 'div > div > div is present');
+      ok($(this).children(':nth-child(2)').children().first().children().first().is('img'), 'div > div > div > img is present');
+      ok($(this).children(':nth-child(2)').children().last().is('div'), 'div > div > div is present');
+      
+      ok($(this).children().last().is('div'), 'div > div is present');
+      ok($(this).children().last().children().first().is('div'), 'div > div > div is present');
+      ok($(this).children().last().children().first().children().last().is('a'), 'div > div > div > a is present');
+      ok($(this).children().last().children().last().is('div'), 'div > div > div is present');
+      ok($(this).children().last().children().last().children().first().is('img'), 'div > div > div > img is present');
+    });
+    verifyPagination(5,2);
     start();
   }, 2000);
 });
